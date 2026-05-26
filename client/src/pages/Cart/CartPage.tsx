@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { useCartStore } from '../../store/cart.store';
-import { formatPrice } from '../../utils/format';
+import { formatPrice, getShippingCents } from '../../utils/format';
 import { Button } from '../../components/ui/Button';
 
 /** Full-page cart view. */
@@ -21,8 +21,8 @@ export const CartPage = () => {
     );
   }
 
-  // Simple shipping rule mirrored from the product page perk.
-  const shippingCents = subtotalCents >= 5000 ? 0 : 599;
+  // Simple FCFA shipping rule mirrored by the backend checkout logic.
+  const shippingCents = getShippingCents(subtotalCents);
   const totalCents = subtotalCents + shippingCents;
 
   return (

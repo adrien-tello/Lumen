@@ -1,4 +1,5 @@
 import { prisma } from '../../config/prisma';
+import { DEFAULT_CURRENCY, getShippingCents } from '../../config/pricing';
 import { ApiError } from '../../utils/ApiError';
 
 interface ShippingInput {
@@ -30,16 +31,25 @@ export const ordersService = {
       }
     }
 
-    const totalCents = cart.items.reduce(
+    const currency = cart.items[0]?.product.currency ?? DEFAULT_CURRENCY;
+    const hasMixedCurrency = cart.items.some((item) => item.product.currency !== currency);
+    if (hasMixedCurrency) {
+      throw ApiError.badRequest('Cart contains products with mixed currencies');
+    }
+
+    const subtotalCents = cart.items.reduce(
       (sum, item) => sum + item.product.priceCents * item.quantity,
       0,
     );
+    const shippingCents = getShippingCents(subtotalCents);
+    const totalCents = subtotalCents + shippingCents;
 
     return prisma.$transaction(async (tx) => {
       const order = await tx.order.create({
         data: {
           userId,
           totalCents,
+          currency,
           ...shipping,
           items: {
             create: cart.items.map((item) => ({

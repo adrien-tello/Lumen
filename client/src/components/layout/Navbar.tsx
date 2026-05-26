@@ -1,18 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Search,
-  ShoppingCart,
-  Heart,
-  User,
-  Menu,
-  X,
-  MapPin,
-  Globe,
-  Moon,
-  Sun,
-} from 'lucide-react';
+import { Search, ShoppingCart, Heart, User, Menu, X, MapPin, Globe, Moon, Sun } from 'lucide-react';
 import { cn } from '../../utils/cn';
 import { NAV_LINKS } from '../../constants';
 import { useCartStore } from '../../store/cart.store';
@@ -57,7 +46,7 @@ export const Navbar = () => {
               <MapPin size={13} /> Deliver to Yaoundé
             </span>
             <span className="flex items-center gap-1.5">
-              <Globe size={13} /> EN / USD
+              <Globe size={13} /> EN / FCFA
             </span>
           </div>
           <div className="flex items-center gap-5">

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { api, getApiError } from '../../api/client';
 import { useCartStore } from '../../store/cart.store';
 import { useAuthStore } from '../../store/auth.store';
-import { formatPrice } from '../../utils/format';
+import { formatPrice, getShippingCents } from '../../utils/format';
 import { Button } from '../../components/ui/Button';
 
 interface ShippingForm {
@@ -40,11 +40,10 @@ export const CheckoutPage = () => {
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  const shippingCents = subtotalCents >= 5000 ? 0 : 599;
+  const shippingCents = getShippingCents(subtotalCents);
   const totalCents = subtotalCents + shippingCents;
 
-  const set = (key: keyof ShippingForm, value: string) =>
-    setForm((f) => ({ ...f, [key]: value }));
+  const set = (key: keyof ShippingForm, value: string) => setForm((f) => ({ ...f, [key]: value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

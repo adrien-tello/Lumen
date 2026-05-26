@@ -82,6 +82,8 @@ const PRODUCT_IMAGES: Record<string, string[]> = {
   ],
 };
 
+const fcfa = (amount: number) => amount * 100;
+
 async function main() {
   console.log('Seeding database...');
 
@@ -115,25 +117,85 @@ async function main() {
     {
       title: 'Wireless Noise-Cancelling Headphones',
       cat: 1,
-      price: 24999,
-      compare: 34999,
+      price: fcfa(150_000),
+      compare: fcfa(210_000),
       featured: true,
     },
-    { title: 'Mechanical Keyboard RGB', cat: 1, price: 8999, compare: 11999, featured: true },
-    { title: '27" 4K UltraSharp Monitor', cat: 1, price: 39999, compare: null, featured: true },
-    { title: 'Ergonomic Wireless Mouse', cat: 1, price: 4999, compare: 6499, featured: false },
-    { title: 'Hydrating Vitamin C Serum', cat: 0, price: 2999, compare: 3999, featured: true },
-    { title: 'Matte Lipstick Collection', cat: 0, price: 1999, compare: null, featured: false },
-    { title: 'Next-Gen Gaming Console', cat: 2, price: 49999, compare: null, featured: true },
-    { title: 'Open-World Adventure Game', cat: 2, price: 5999, compare: 6999, featured: false },
-    { title: 'Pro Wireless Controller', cat: 2, price: 6999, compare: 7999, featured: true },
-    { title: 'Building Blocks Mega Set', cat: 3, price: 3499, compare: 4499, featured: false },
-    { title: 'Remote Control Racing Car', cat: 3, price: 4299, compare: null, featured: true },
+    {
+      title: 'Mechanical Keyboard RGB',
+      cat: 1,
+      price: fcfa(55_000),
+      compare: fcfa(72_000),
+      featured: true,
+    },
+    {
+      title: '27" 4K UltraSharp Monitor',
+      cat: 1,
+      price: fcfa(240_000),
+      compare: null,
+      featured: true,
+    },
+    {
+      title: 'Ergonomic Wireless Mouse',
+      cat: 1,
+      price: fcfa(30_000),
+      compare: fcfa(39_000),
+      featured: false,
+    },
+    {
+      title: 'Hydrating Vitamin C Serum',
+      cat: 0,
+      price: fcfa(18_000),
+      compare: fcfa(24_000),
+      featured: true,
+    },
+    {
+      title: 'Matte Lipstick Collection',
+      cat: 0,
+      price: fcfa(12_000),
+      compare: null,
+      featured: false,
+    },
+    {
+      title: 'Next-Gen Gaming Console',
+      cat: 2,
+      price: fcfa(300_000),
+      compare: null,
+      featured: true,
+    },
+    {
+      title: 'Open-World Adventure Game',
+      cat: 2,
+      price: fcfa(35_000),
+      compare: fcfa(42_000),
+      featured: false,
+    },
+    {
+      title: 'Pro Wireless Controller',
+      cat: 2,
+      price: fcfa(42_000),
+      compare: fcfa(48_000),
+      featured: true,
+    },
+    {
+      title: 'Building Blocks Mega Set',
+      cat: 3,
+      price: fcfa(22_000),
+      compare: fcfa(27_000),
+      featured: false,
+    },
+    {
+      title: 'Remote Control Racing Car',
+      cat: 3,
+      price: fcfa(26_000),
+      compare: null,
+      featured: true,
+    },
     {
       title: 'Stainless Steel Cookware Set',
       cat: 4,
-      price: 12999,
-      compare: 15999,
+      price: fcfa(80_000),
+      compare: fcfa(96_000),
       featured: false,
     },
   ];
@@ -146,6 +208,7 @@ async function main() {
         description: `${p.title} blends polished design, dependable performance and everyday value. Ships quickly with careful packaging and includes a 30-day return policy.`,
         priceCents: p.price,
         comparePriceCents: p.compare,
+        currency: 'XAF',
         stock: 25 + i * 3,
         images: PRODUCT_IMAGES[p.title],
         rating: Number((3.8 + (i % 5) * 0.25).toFixed(1)),

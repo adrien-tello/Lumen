@@ -184,7 +184,7 @@ export const ProductDetailPage = () => {
           <div className="mt-8 grid grid-cols-2 gap-4 border-t border-border pt-6 text-sm">
             <div className="flex items-center gap-2">
               <Truck size={18} className="text-muted" />
-              <span>Free delivery over $50</span>
+              <span>Free delivery over 50,000 FCFA</span>
             </div>
             <div className="flex items-center gap-2">
               <ShieldCheck size={18} className="text-muted" />
